@@ -4,7 +4,10 @@ import argparse
 import csv
 import validators
 
-headers = {}
+#Use Chrome Windows User Agent to try and avoid blocked python requests User Agent
+headers = {
+     "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+     }
 
 def getURLs(file, column_header):
 #Get URLs from .csv 
@@ -38,7 +41,7 @@ def checkURLs(urls, timeout):
     for url in urls:
         try: 
             #req to URL
-            res = requests.get(url, timeout=timeout)
+            res = requests.get(url, timeout=timeout, headers=headers)
         except requests.exceptions.ConnectionError:
                 print(f"Could not connect to {url}, site appears down.")
                 continue
@@ -78,7 +81,7 @@ def main():
         sys.exit(0)
 
     else:
-        print("No file specified. \nUse: python3 site-up.py -f <file.csv> [optional args]")
+        print("No file specified. Use: python3 site-up.py -f <file.csv> [optional args]")
 
 if __name__ == "__main__":
     main()
