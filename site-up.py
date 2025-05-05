@@ -4,9 +4,9 @@ import argparse
 import csv
 import validators
 
-#Use Chrome Windows User Agent to try and avoid blocked python requests User Agent
+#Use Chrome Mac User Agent to try and avoid blocked python requests User Agent
 headers = {
-     "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+     "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
      }
 
 def getURLs(file, column_header):
