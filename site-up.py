@@ -59,15 +59,16 @@ def checkURLs(urls, timeout):
     
 def writeOutput(output, file_name):
     output_file = open(file_name, 'w')
-    for line in output:
-        output_file.write(f"{line[0]}: {line[1]}")
+    for site in output:
+        output_file.write(f"{site}\n")
+    print(f"Sites with code 200 written to file {file_name}")
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", "-f", metavar="\b", help="CSV File to pass into script")
     parser.add_argument("--column-header", "-c", metavar="\b", help="CSV Column Header for URL values (default: url)")
     parser.add_argument("--timeout", "-t", metavar="\b", help="Timeout in seconds (default: 10)")
-    parser.add_argument("--output", "-o", metavar="Output", help="Write output to file")
+    parser.add_argument("--output", "-o", metavar="Output", help="Write sites that appear up to file")
     args=parser.parse_args()
     
     if args.file:
@@ -75,7 +76,7 @@ def main():
         urls = getURLs(args.file, args.column_header)
         print("We are checking...")
         output = checkURLs(urls, args.timeout)
-
+        print(output)
         if args.output:
             writeOutput(output, args.output)
         sys.exit(0)
