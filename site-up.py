@@ -34,28 +34,26 @@ def checkURLs(urls, timeout):
     if not timeout:
          timeout = 10
     timeout = int(timeout)    
+
     for url in urls:
         try: 
             #req to URL
             res = requests.get(url, timeout=timeout)
         except requests.exceptions.ConnectionError:
                 print(f"Could not connect to {url}, site appears down.")
+                continue
         except requests.exceptions.Timeout:
                 print(f"Request to {url} timed out and site appears to be down.")
+                continue
         except requests.exceptions.RequestException:
                 print(f"Site {url} appears down!")
+                continue
 
-        #Check response code
-        if res:
-            print(f"Site {url} is up and returned status code: {res.status_code}")
-        else:
-            print(f"Site {url} appears up but returned status code: {res.status_code}")
-        url_code = f"{url}: {res.status_code}"
-        to_output.append(url_code)
+        print(f"Site {url} is up and returned status code: {res.status_code}")
+        to_output.append(f"{url}: {res.status_code}")
         
     return to_output
     
-
 def writeOutput(output, file_name):
     output_file = open(file_name, 'w')
     for line in output:
