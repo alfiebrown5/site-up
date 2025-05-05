@@ -1,5 +1,6 @@
 url,junk
 https://www.google.com,junk
-https://www.doesntexist.com,junk
+https://httpbin.org/status/404,junk
+https://doesnotexist.com/,junk
 https://github.com/alfiebrown5/,junk
 null,junk
